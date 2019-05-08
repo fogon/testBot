@@ -1,46 +1,89 @@
 const TelegramBot = require('node-telegram-bot-api');
 const token = '747941698:AAGazXigJwIIMHjmRgGHhplU5LXerVyZzZM';
 const bot = new TelegramBot(token, {polling: true});
+// Переменная с номером
+var b = 1;
 
-var i = '';
+var c;
 
-console.log(i);
+var arr = [];
+
+//console.log(c);
 
 bot.on('message', function(msg) {
 
 	var chatId = msg.chat.id;
 
-	console.log(chatId);
+	var messageId = msg.from.id;
 
-	if (chatId === 322724363 || 511825463){
+	//console.log(msg.from);
 
-		var text = msg.text;
+	var firstName = msg.from.first_name;
 
-		 var a = text.search('#LKWAVEкурс');
+	var text = msg.text;
 
-		 console.log(i);
+	var a = text.search('#LKWAVEкурс');
 
-		if (a >= 0) {
+	//console.log(i);
 
-			i += text + ' ';
+	if (a >= 0) {
 
-			console.log(i);
+		var text = text.slice(-19,-12);
+
+		var text = text.trim();
+
+		var obj ={name: firstName,
+				sum: text};
+ 
+		arr.push(obj);
+
+		//console.log(arr);
+
+		for (var i = 0; i <= arr.length; i++) {
+			parseFloat(arr.obj.sum);
+		};
+
+		console.log(arr);
+
+		b++;
+
+	};
+
+	if (text === `/getResult`) {
+
+		if (arr.length > 0) {
+
+			//var str = `Всего участников: ${b-1} \n \n ${b}) ${obj.name}, ${obj.sum}`;
+
+			//console.log(str);
+
+			function compareReversed(arr) {
+
+				var name = arr.obj.name;
+
+				var sum = arr.obj.sum;
+
+				return sum > 0;
+
+			};
+
+			console.log(compareReversed(arr));
+
+			arr.sort(compareReversed);
+
+			bot.sendMessage(chatId, arr);
+	
+		}
+
+		else {
+
+			bot.sendMessage(chatId, `Нет участников`);
 
 		};
 
-			if (text === '/getResult') {
-
-				//console.log(a);
-
-				bot.sendMessage(chatId, i);
-
-			};		
-		
-	};
+	};	
 
 });
-
-
 
 
 
@@ -60,3 +103,32 @@ bot.on('message',function(msg){
 
 	bot.sendMessage(chatId,'Это сообщение номер '+i);
 });*/
+
+
+
+
+
+
+
+
+/*arr.push(text);
+
+		var sum = arr.join(`, `)
+
+		parseFloat(sum);
+
+		console.log(sum);
+
+		//console.log(isNaN(text));
+
+		c = `${firstName}, ${text}`;
+
+		arr.push(c);
+
+		console.log(arr);
+	
+		i += `${b}) ${c} \n`;
+
+		console.log(i);
+
+		b++; */
